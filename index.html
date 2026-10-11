@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Awesome Emu· docs</title>
+  <style>
+    /* ===== RESET & GLOBAL ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Comic Neue', 'Fredoka', 'Segoe UI', 'Comic Sans MS', cursive, sans-serif;
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&family=Fredoka:wght@400;600;700&display=swap');
+
+    body {
+      background: #f0f7ff; /* soft white-blue */
+      color: #0a2a5c; /* deep blue */
+      padding: 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ===== FUN ANIMATIONS ===== */
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(3deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    @keyframes wobble {
+      0% { transform: rotate(0deg); }
+      25% { transform: rotate(8deg); }
+      75% { transform: rotate(-8deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.9); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+
+    @keyframes rainbowBorder {
+      0% { border-color: #ffd966; }
+      25% { border-color: #ffe066; }
+      50% { border-color: #b3ffb3; }
+      75% { border-color: #ffb3b3; }
+      100% { border-color: #ffd966; }
+    }
+
+    /* ===== HEADER ===== */
+    .emu-header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem 1.5rem;
+      background: #ffffff;
+      padding: 1.2rem 2rem;
+      border-radius: 120px 120px 80px 80px;
+      border: 6px solid #0047ab; /* deep blue */
+      box-shadow: 0 12px 0 #002b66, 0 16px 20px rgba(0,0,0,0.2);
+      margin-bottom: 2rem;
+      animation: float 4s ease-in-out infinite;
+      width: fit-content;
+      max-width: 95%;
+      transition: all 0.2s;
+    }
+
+    .emu-header h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: #003087;
+      text-shadow: 4px 4px 0 #ffd700, 6px 6px 0 #ff4d4d;
+      letter-spacing: 2px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .emu-header h1 span {
+      display: inline-block;
+      animation: wobble 3s infinite;
+    }
+
+    .emu-tagline {
+      background: #ffd966;
+      color: #002244;
+      font-weight: 700;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 1.3rem;
+      border: 4px solid #0047ab;
+      box-shadow: 0 6px 0 #002244;
+      transform: rotate(-2deg);
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    .docs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      max-width: 1300px;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 900px) {
+      .docs-grid {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+      }
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: #ffffff;
+      border-radius: 50px;
+      padding: 2rem 1.8rem;
+      border: 5px solid #0047ab;
+      box-shadow: 0 12px 0 #002b66, 0 18px 30px rgba(0, 71, 171, 0.15);
+      transition: all 0.2s ease;
+      animation: pop 0.4s ease-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 0 #002b66, 0 24px 35px rgba(0, 71, 171, 0.25);
+      border-color: #ffd700;
+      animation: rainbowBorder 2s infinite;
+    }
+
+    .card h2 {
+      font-size: 2.2rem;
+      color: #003087;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      border-bottom: 5px dashed #ffd700;
+      padding-bottom: 0.6rem;
+    }
+
+    .card h2 i {
+      font-size: 2rem;
+      animation: bounce 1.8s infinite;
+    }
+
+    .card p, .card li {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #0a2a5c;
+      font-weight: 600;
+    }
+
+    .card ul, .card ol {
+      padding-left: 1.8rem;
+      margin-top: 0.8rem;
+    }
+
+    .card li {
+      margin: 0.7rem 0;
+      background: #e6f0ff;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      border-left: 10px solid #0047ab;
+      box-shadow: 0 4px 0 #b3c9f0;
+    }
+
+    /* ===== BADGES & COLOURS ===== */
+    .badge {
+      display: inline-block;
+      background: #0047ab;
+      color: #ffd700;
+      font-weight: 700;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 1rem;
+      border: 3px solid #ffd966;
+      margin-right: 0.5rem;
+    }
+
+    .yellow-highlight {
+      background: #ffd966;
+      color: #002244;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      font-weight: 700;
+      border: 2px solid #0047ab;
+    }
+
+    .red-highlight {
+      background: #ff4d4d;
+      color: white;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      font-weight: 700;
+      border: 2px solid #aa0000;
+    }
+
+    .green-highlight {
+      background: #b3ffb3;
+      color: #004d00;
+      padding: 0.2rem 0.6rem;
+      border-radius: 30px;
+      font-weight: 700;
+      border: 2px solid #008000;
+    }
+
+    /* ===== COMMAND EXAMPLES ===== */
+    .command-box {
+      background: #0a2a5c;
+      border-radius: 30px;
+      padding: 1.2rem 1.5rem;
+      margin: 1.2rem 0;
+      border: 4px solid #ffd700;
+      box-shadow: 0 8px 0 #001a3b;
+      color: #e0f0ff;
+      font-family: 'Courier New', monospace;
+      font-size: 1.1rem;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .command-box span {
+      color: #ffd966;
+      font-weight: bold;
+    }
+
+    /* ===== PLATFORM PILLS ===== */
+    .platform-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+
+    .pill {
+      background: #0047ab;
+      color: white;
+      padding: 0.5rem 1.4rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      border: 3px solid #ffd966;
+      box-shadow: 0 5px 0 #002244;
+      transition: 0.1s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pill.yellow {
+      background: #ffd966;
+      color: #002244;
+      border-color: #0047ab;
+    }
+
+    .pill.red {
+      background: #ff4d4d;
+      color: white;
+      border-color: #aa0000;
+    }
+
+    .pill.green {
+      background: #b3ffb3;
+      color: #004d00;
+      border-color: #008000;
+    }
+
+    /* ===== SOCIAL LINKS ===== */
+    .social-section {
+      width: 100%;
+      max-width: 1300px;
+      background: #ffffff;
+      border-radius: 80px;
+      border: 6px solid #0047ab;
+      box-shadow: 0 12px 0 #002b66;
+      padding: 2rem 1.5rem;
+      margin: 1rem 0 2rem;
+      text-align: center;
+      animation: float 5s infinite;
+    }
+
+    .social-section h3 {
+      font-size: 2rem;
+      color: #003087;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 0.9rem 1.8rem;
+      margin-top: 1.2rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.6rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      color: #0a2a5c;
+      background: #e6f0ff;
+      border: 4px solid #0047ab;
+      box-shadow: 0 6px 0 #002b66;
+      transition: all 0.15s;
+      animation: bounce 2.5s infinite;
+    }
+
+    .social-link:nth-child(odd) {
+      animation-delay: 0.2s;
+    }
+
+    .social-link:hover {
+      background: #ffd966;
+      border-color: #ff4d4d;
+      transform: scale(1.08) translateY(-4px);
+      box-shadow: 0 8px 0 #aa0000;
+    }
+
+    .social-link img {
+      width: 28px;
+      height: 28px;
+      filter: drop-shadow(2px 2px 0 #0047ab);
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      margin-top: 2rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #003087;
+      background: #ffd966;
+      padding: 0.8rem 2.5rem;
+      border-radius: 60px;
+      border: 4px solid #0047ab;
+      box-shadow: 0 8px 0 #002b66;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      animation: wobble 6s infinite;
+    }
+
+    /* ===== CHILDISH EXTRAS ===== */
+    .emu-icon {
+      font-size: 3rem;
+      filter: drop-shadow(4px 4px 0 #ffd700);
+    }
+
+    .floating-emojis {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .floating-emojis span {
+      position: absolute;
+      font-size: 3.5rem;
+      opacity: 0.2;
+      animation: float 10s infinite alternate;
+    }
+
+    .floating-emojis span:nth-child(1) { top: 5%; left: 2%; animation-duration: 12s; }
+    .floating-emojis span:nth-child(2) { top: 70%; left: 85%; animation-duration: 15s; }
+    .floating-emojis span:nth-child(3) { top: 40%; left: 90%; animation-duration: 8s; }
+    .floating-emojis span:nth-child(4) { top: 80%; left: 10%; animation-duration: 18s; }
+    .floating-emojis span:nth-child(5) { top: 15%; left: 70%; animation-duration: 11s; }
+  </style>
+</head>
+<body>
+  <!-- floating background emojis for childish fun -->
+  <div class="floating-emojis">
+    <span>🐦</span>
+    <span>🔐</span>
+    <span>💬</span>
+    <span>⚡</span>
+    <span>🎈</span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="emu-header">
+    <h1>
+      <span>🐦</span> Awesome Emu <span>⚡</span>
+    </h1>
+    <div class="emu-tagline">
+      🛡️ hack from anywhere · Telegram · Discord · Slack · G Chat · Web
+    </div>
+  </header>
+
+  <!-- DOCUMENTATION GRID -->
+  <div class="docs-grid">
+    <!-- CARD 1: WHAT IS AWESOME EMU -->
+    <div class="card">
+      <h2><i>🐣</i> What is Awesome Emu?</h2>
+      <p>
+        <span class="yellow-highlight">Awesome Emu</span> is a <strong>cybersecurity tool</strong> 
+        that lets you <span class="green-highlight">fire commands</span> through your favourite chat apps. 
+        It's like having a <span class="red-highlight">cyber‑emu</span> in your pocket!
+      </p>
+      <p style="margin-top: 1rem;">
+        You can control scans, exploits, reconnaissance, and more — all from 
+        <strong>Telegram, Discord, Slack, Google Chat</strong> or the 
+        <strong>Awesome Emu web app</strong>.
+      </p>
+      <div class="platform-pills">
+        <span class="pill">📱 Telegram</span>
+        <span class="pill yellow">🎮 Discord</span>
+        <span class="pill red">💼 Slack</span>
+        <span class="pill green">💬 Google Chat</span>
+        <span class="pill">🌐 Web</span>
+      </div>
+      <p style="margin-top: 1.5rem; font-style: italic;">
+        ⚡ It looks awesome, feels awesome, and runs on <span class="yellow-highlight">emu‑power</span> 🐦
+      </p>
+    </div>
+
+    <!-- CARD 2: WHY IT'S AWESOME (ADVANTAGES) -->
+    <div class="card">
+      <h2><i>🏆</i> Why Awesome Emu?</h2>
+      <ul>
+        <li><span class="badge">1</span> <strong>Multi‑platform command</strong> – fire from any chat app</li>
+        <li><span class="badge">2</span> <strong>No terminal needed</strong> – just type in your chat</li>
+        <li><span class="badge">3</span> <strong>Awesome UI</strong> – deep blue, yellow, red & green</li>
+        <li><span class="badge">4</span> <strong>Real‑time feedback</strong> – instant responses</li>
+        <li><span class="badge">5</span> <strong>Childish fun</strong> – because security can be playful</li>
+        <li><span class="badge">6</span> <strong>Open & connected</strong> – GitHub, socials, and more</li>
+      </ul>
+      <p style="margin-top: 1.2rem; background: #b3ffb3; border-radius: 30px; padding: 0.6rem 1rem; border: 3px solid #008000;">
+        ✅ <strong>Pro tip:</strong> Use <span class="red-highlight">/emu scan</span> to start a quick recon.
+      </p>
+    </div>
+
+    <!-- CARD 3: COMMANDS VIA PLATFORMS -->
+    <div class="card">
+      <h2><i>⌨️</i> Fire Commands</h2>
+      <p>Example commands you can send from any platform:</p>
+      <div class="command-box">
+        <span>/emu</span> scan target.com <br>
+        <span>/emu</span> exploit --payload reverse_shell <br>
+        <span>/emu</span> recon --deep <br>
+        <span>/emu</span> status <br>
+        <span>/emu</span> help
+      </div>
+      <p>Works on:</p>
+      <div class="platform-pills">
+        <span class="pill">Telegram</span>
+        <span class="pill yellow">Discord</span>
+        <span class="pill red">Slack</span>
+        <span class="pill green">G Chat</span>
+        <span class="pill">Web</span>
+      </div>
+      <p style="margin-top: 1rem;">
+        🔹 Just type the command in your chat, and Emu does the rest.
+      </p>
+    </div>
+
+    <!-- CARD 4: WEB APP & LOOKS -->
+    <div class="card">
+      <h2><i></i> Accurate Cyber Defense</h2>
+      <p>
+        Awesome Emu <strong></strong> 
+        and looks <span class="yellow-highlight">super attractive</span>.
+      </p>
+      <ul>
+        <li><span class="green-highlight"></span> </li>
+        <li><span class="yellow-highlight"></span></li>
+        <li><span class="red-highlight"></span> </li>
+        <li><span class="green-highlight"></span> </li>
+      </ul>
+      <p style="margin-top: 1rem;">
+
+      </p>
+    </div>
+
+    <!-- CARD 5: INSTALLATION (NEW) -->
+    <div class="card">
+      <h2><i>📦</i> Installation Guide</h2>
+      <p><strong>1. Clone with Git:</strong></p>
+      <div class="command-box">
+        <span>git</span> clone https://github.com/Iankulani/awesome_emu.git <br>
+        <span>cd</span> awesome_emu
+      </div>
+      <p><strong>2. Install Python dependencies:</strong></p>
+      <div class="command-box">
+        <span>pip</span> install -r requirements.txt
+      </div>
+      <p><strong>3. Optional: Install system tools (nmap, curl, wget, etc.)</strong></p>
+      <div class="command-box">
+        <span>#</span> Debian/Ubuntu: <br>
+        sudo apt install nmap curl wget netcat-openbsd dnsutils whois traceroute <br>
+        <span>#</span> macOS: <br>
+        brew install nmap curl wget netcat dnsutils whois traceroute
+      </div>
+      <p><strong>4. Run the tool:</strong></p>
+      <div class="command-box">
+        <span>python3</span> awesome_emu.py
+      </div>
+      <p style="margin-top: 1rem;">
+        🐍 <strong>Python 3.7+</strong> required. Run with <span class="yellow-highlight">sudo</span> for full functionality.
+      </p>
+    </div>
+
+    <!-- CARD 6: QUICK START (NEW) -->
+    <div class="card">
+      <h2><i>🚀</i> Quick Start</h2>
+      <p>After installation, launch the tool and try these commands:</p>
+      <ul>
+        <li><span class="badge"></span> <strong>help</strong> – see all 500+ commands</li>
+        <li><span class="badge"></span> <strong>ping 127.0.0.1</strong> – test connectivity</li>
+        <li><span class="badge"></span> <strong>nmap_quick 192.168.1.1</strong> – quick port scan</li>
+        <li><span class="badge"></span> <strong>curl_get https://example.com</strong> – fetch a page</li>
+        <li><span class="badge"></span> <strong>phish_facebook</strong> – generate a phishing test page</li>
+        <li><span class="badge"></span> <strong>keylogger_start</strong> – start the keylogger (F10 to stop)</li>
+        <li><span class="badge"></span> <strong>dos_syn 192.168.1.100 80 30</strong> – SYN flood test (authorized only!)</li>
+      </ul>
+      <p style="margin-top: 1.2rem; background: #ffd966; border-radius: 30px; padding: 0.6rem 1rem; border: 3px solid #0047ab;">
+        ⚠️ <strong>Only use on systems you own or have permission to test.</strong>
+      </p>
+    </div>
+  </div>
+
+  <!-- SOCIAL LINKS SECTION -->
+  <div class="social-section">
+    <h3>
+      <span>🔗</span> Connect with Awesome Emu <span>🔗</span>
+    </h3>
+    <p style="font-size: 1.3rem; margin-bottom: 1rem;">
+      Follow, star, and join the emu army!
+    </p>
+    <div class="social-links">
+      <a href="https://github.com/Accurate-Cyber-Defense" class="social-link" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub"> GitHub
+      </a>
+      <a href="https://t.me/awesomeemu" class="social-link" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111646.png" alt="Telegram"> Telegram
+      </a>
+      <a href="https://discord.com/invite/DW46bUKX3b" class="social-link" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord"> Discord
+      </a>
+      <a href="https://awesomeemu.slack.com" class="social-link" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111612.png" alt="Slack"> Slack
+      </a>
+      <a href="https://reddit.com/r/awesomeemu" class="social-link" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111589.png" alt="Reddit"> Reddit
+      </a>
+      <a href="https://wa.me/awesomeemu" class="social-link" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111728.png" alt="WhatsApp"> WhatsApp
+      </a>
+      <a href="https://www.pinterest.com/accuratecyberdefense/" class="social-link" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111567.png" alt="Pinterest"> Pinterest
+      </a>
+      <a href="https://facebook.com/awesomeemu" class="social-link" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111398.png" alt="Facebook"> Facebook
+      </a>
+      <a href="https://x.com/accurate_mw" class="social-link" target="_blank">
+        <img src="https://cdn-icons-png.flaticon.com/512/2111/2111471.png" alt="X"> X
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <span>🐦</span> Awesome Emu — hack with joy, defend with style <span>⚡</span>
+  </div>
+
+  <!-- tiny script for extra childish fun -->
+  <script>
+    (function() {
+      // console emu greeting
+      console.log('%c🐦 Awesome Emu documentation ready!', 'font-size:16px; background:#0047ab; color:#ffd700; padding:4px 10px; border-radius:20px;');
+
+      // make social links jiggle a bit more on hover (already css)
+      // add a fun click alert? no, keep it playful but not annoying
+      const pills = document.querySelectorAll('.pill, .social-link');
+      pills.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+          // tiny wobble already, but let's play a sound? no, just visual
+        });
+      });
+
+      // random emu facts in console
+      const facts = [
+        'Emus can run up to 50 km/h — just like our commands!',
+        'Awesome Emu supports Telegram, Discord, Slack, G Chat & Web.',
+        'Did you know? The emu is on the Australian coat of arms. 🇦🇺',
+        'Fire commands with /emu scan, /emu exploit, /emu recon.'
+      ];
+      const randomFact = facts[Math.floor(Math.random() * facts.length)];
+      console.log('%c ' + randomFact, 'color:#0047ab; font-weight:bold; background:#ffd966; padding:2px 8px; border-radius:30px;');
+    })();
+  </script>
+</body>
+</html>
