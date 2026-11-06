@@ -7,3 +7,7 @@
 git clone https://github.com/Iankulani/Awesome-Emu-Doc.git
 cd Awesome-Emu-Doc
 ```
+
+# How tO run
+```bash
+```
